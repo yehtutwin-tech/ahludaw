@@ -1,7 +1,16 @@
 import Link from "next/link";
 import React from "react";
 
-export default function page() {
+export default async function page() {
+  const res = await fetch('http://localhost:3000/api/admin', {
+    method: 'GET',
+    cache: 'no-store', // optional: skip caching
+  });
+
+  const data = await res.json();
+
+  console.log(data);
+
   return (
     <div className="max-w-6xl mx-auto mt-8 px-4">
       <div className="flex justify-between items-center mb-4">

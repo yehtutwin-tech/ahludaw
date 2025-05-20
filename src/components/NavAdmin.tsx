@@ -17,12 +17,12 @@ export default function NavAdmin() {
     <nav className="bg-white shadow-lg">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <div className="text-xl font-semibold text-gray-800">
-            Admin Dashboard
-          </div>
+          <Link href={'/admin'} className="text-xl font-semibold text-gray-800">
+            OHM Admin
+          </Link>
           <div className="hidden md:flex space-x-4">
             {navItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = pathname === '/admin'+item.href;
               return (
                 <Link
                   key={item.href}
