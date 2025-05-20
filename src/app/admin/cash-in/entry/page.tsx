@@ -1,5 +1,7 @@
+'use client'
 import Link from 'next/link'
 import React from 'react'
+import DonorSearchInput from './DonarSearchInput'
 
 export default function page() {
   return (
@@ -25,13 +27,13 @@ export default function page() {
                         <label className="block text-sm font-semibold text-gray-700 mb-2">Amount <span className="text-red-500">*</span></label>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                <span className="text-gray-500 font-medium">$</span>
+                                <span className="text-gray-500 font-medium">Ks</span>
                             </div>
                             <input type="number" step="0.01" required
-                                className="w-full pl-8 pr-16 py-2.5 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition-colors bg-gray-50 hover:bg-white" 
-                                placeholder="0.00" />
+                                className="w-full pl-10 pr-16 py-2.5 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition-colors bg-gray-50 hover:bg-white" 
+                                placeholder="0" />
                             <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                                <span className="text-gray-500 font-medium">USD</span>
+                                <span className="text-gray-500 font-medium">MMK</span>
                             </div>
                         </div>
                     </div>
@@ -39,9 +41,10 @@ export default function page() {
 
                 <div className="relative">
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Donor Name <span className="text-red-500">*</span></label>
-                    <input type="text" required
+                    {/* <input type="text" required
                         className="w-full px-4 py-2.5 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition-colors bg-gray-50 hover:bg-white" 
-                        placeholder="Enter donor name" />
+                        placeholder="Enter donor name" /> */}
+                    <DonorSearchInput onSelect={(donor) => console.log("Selected:", donor)} />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

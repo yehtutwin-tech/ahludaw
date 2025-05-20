@@ -2,6 +2,8 @@
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
+import { LogOut } from "lucide-react";
+import { signOut } from "next-auth/react"; // Uncomment if using NextAuth
 
 const navItems = [
   { href: "/cash-in/entry", label: "Cash In Entry" },
@@ -17,16 +19,16 @@ export default function NavAdmin() {
     <nav className="bg-white shadow-lg">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <Link href={'/admin'} className="text-xl font-semibold text-gray-800">
+          <Link href={"/admin"} className="text-xl font-semibold text-gray-800">
             OHM Admin
           </Link>
           <div className="hidden md:flex space-x-4">
             {navItems.map((item) => {
-              const isActive = pathname === '/admin'+item.href;
+              const isActive = pathname === "/admin" + item.href;
               return (
                 <Link
                   key={item.href}
-                  href={'/admin'+item.href}
+                  href={"/admin" + item.href}
                   className={`cursor-pointer hover:text-gray-800 ${
                     isActive ? "text-blue-600 underline" : "text-gray-600"
                   }`}
@@ -35,9 +37,12 @@ export default function NavAdmin() {
                 </Link>
               );
             })}
-            <Link href="#" className="text-red-600 hover:text-red-800">
-              Logout
-            </Link>
+            <button
+              onClick={() => signOut({ callbackUrl: "/auth/login" })}
+              className="text-red-600 hover:text-red-800 cursor-pointer flex items-center gap-1"
+            >
+              <LogOut className="w-4 h-4" /> Logout
+            </button>
           </div>
         </div>
       </div>
