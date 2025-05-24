@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react"; // Uncomment if using NextAuth
+import { Menu, X } from "lucide-react";
 
 const navItems = [
   { href: "/cash-in/entry", label: "Cash In Entry" },
@@ -14,6 +15,11 @@ const navItems = [
 
 export default function NavAdmin() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <nav className="bg-white shadow-lg">
@@ -44,7 +50,35 @@ export default function NavAdmin() {
               <LogOut className="w-4 h-4" /> Logout
             </button>
           </div>
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button className="mobile-menu-button p-2" onClick={toggleMenu}>
+              {isOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
+          </div>
         </div>
+      </div>
+      {/* Mobile menu */}
+      <div className={`mobile-menu ${isOpen ? "" : "hidden"} md:hidden`}>
+        {navItems.map((item) => {
+          const isActive = pathname === item.href;
+          return (
+            <Link
+              key={item.href}
+              href={"/admin" + item.href}
+              onClick={toggleMenu}
+              className={`block py-2 px-4 text-sm hover:bg-gray-200 ${
+                isActive ? "text-blue-600 underline" : "text-gray-600"
+              }`}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
       </div>
     </nav>
   );
